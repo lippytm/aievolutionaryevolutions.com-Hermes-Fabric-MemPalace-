@@ -4,10 +4,11 @@ from .audit import audit_log
 from .config import settings
 from .memory import memory_store
 from .models import QuickActionRequest, RouteRequest, RouteResponse
+from .prompts import get_prompt
 from .providers import ProviderUnavailable, route
 from .quick_actions import execute, list_actions
 
-app = FastAPI(title="AI Evolutionary Evolutions Agent Platform", version="0.2.0")
+app = FastAPI(title="AI Evolutionary Evolutions Agent Platform", version="0.3.0")
 
 
 @app.get("/health")
@@ -18,6 +19,14 @@ async def health() -> dict:
 @app.get("/agents")
 async def agents() -> list[dict]:
     return list_agents()
+
+
+@app.get("/prompts/{number}")
+async def prompt(number: int) -> dict:
+    definition = get_prompt(number)
+    if not definition:
+        raise HTTPException(status_code=404, detail="Prompt is not registered")
+    return definition.__dict__
 
 
 @app.get("/quick-actions")

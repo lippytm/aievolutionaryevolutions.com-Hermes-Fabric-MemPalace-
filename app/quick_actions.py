@@ -11,20 +11,35 @@ class ActionDefinition:
     implemented: bool = False
 
 
-ACTIONS = {
-    "list_memory": ActionDefinition("list_memory", "Recall conversation memory", False, True),
-    "create_lesson": ActionDefinition("create_lesson", "Create a structured lesson plan", False, True),
-    "summarize_repository": ActionDefinition("summarize_repository", "Prepare a repository analysis plan", False, True),
-    "send_email": ActionDefinition("send_email", "Send an email", True),
-    "post_slack": ActionDefinition("post_slack", "Post a Slack message", True),
-    "run_zapier": ActionDefinition("run_zapier", "Trigger a Zapier automation", True),
-    "write_github": ActionDefinition("write_github", "Create or modify GitHub files", True),
-    "deploy": ActionDefinition("deploy", "Deploy a service", True),
-    "financial_action": ActionDefinition("financial_action", "Perform a financial action", True),
-    "credential_change": ActionDefinition("credential_change", "Change credentials", True),
-    "blockchain_transaction": ActionDefinition("blockchain_transaction", "Submit a blockchain transaction", True),
-    "destructive_action": ActionDefinition("destructive_action", "Delete or irreversibly alter data", True),
+SAFE_ACTIONS = {
+    "list_memory": "Recall conversation memory",
+    "create_lesson": "Create a structured lesson plan",
+    "summarize_repository": "Prepare a repository analysis plan",
+    "explain_step": "Explain the next step in plain language",
+    "generate_code_example": "Generate a teaching code example",
+    "create_video_brief": "Create a video explainer brief",
+    "create_ebook_outline": "Create an ebook outline",
+    "create_audiobook_script": "Create an audiobook narration outline",
+    "create_chatbot_spec": "Create a chatbot specification",
+    "simulate_trade": "Run a non-financial trading simulation plan",
+    "create_issue_draft": "Draft a repository issue without publishing it",
+    "research_concept": "Prepare a research and comparison plan",
 }
+
+GATED_ACTIONS = {
+    "send_email": "Send an email",
+    "post_slack": "Post a Slack message",
+    "run_zapier": "Trigger a Zapier automation",
+    "write_github": "Create or modify GitHub files",
+    "deploy": "Deploy a service",
+    "financial_action": "Perform a financial action",
+    "credential_change": "Change credentials",
+    "blockchain_transaction": "Submit a blockchain transaction",
+    "destructive_action": "Delete or irreversibly alter data",
+}
+
+ACTIONS = {name: ActionDefinition(name, description, False, True) for name, description in SAFE_ACTIONS.items()}
+ACTIONS.update({name: ActionDefinition(name, description, True, False) for name, description in GATED_ACTIONS.items()})
 
 
 def list_actions() -> list[dict]:
@@ -41,10 +56,18 @@ def execute(action: str, parameters: dict, approval_token: str | None = None) ->
         return QuickActionResult(action=action, status="approval_required", message="Explicit approval is required")
     if not definition.implemented:
         return QuickActionResult(action=action, status="disabled", message="Connector is not implemented yet")
+
+    result = {"parameters": parameters, "side_effects": False}
     if action == "create_lesson":
-        result = {"title": parameters.get("topic", "Untitled lesson"), "objectives": parameters.get("objectives", []), "steps": ["Explain the concept", "Show a worked example", "Give a practice task", "Check understanding"]}
-    elif action == "summarize_repository":
-        result = {"repository": parameters.get("repository"), "requested_checks": ["structure", "dependencies", "tests", "secrets", "deployment", "documentation"]}
-    else:
-        result = {"conversation_id": parameters.get("conversation_id", "default"), "limit": parameters.get("limit", 20)}
+        result.update({"title": parameters.get("topic", "Untitled lesson"), "steps": ["Explain", "Demonstrate", "Practice", "Review"]})
+    elif action == "create_video_brief":
+        result.update({"title": parameters.get("topic", "Untitled video"), "scenes": ["Hook", "Concept", "Walkthrough", "Exercise", "Recap"]})
+    elif action == "create_ebook_outline":
+        result.update({"title": parameters.get("topic", "Untitled ebook"), "chapters": ["Foundations", "Core concepts", "Projects", "Troubleshooting", "Next steps"]})
+    elif action == "create_audiobook_script":
+        result.update({"title": parameters.get("topic", "Untitled audiobook"), "sections": ["Opening", "Lesson", "Example", "Reflection", "Closing"]})
+    elif action == "simulate_trade":
+        result.update({"warning": "Simulation only; no financial action is performed", "asset": parameters.get("asset"), "rules": parameters.get("rules", [])})
+    elif action == "create_issue_draft":
+        result.update({"title": parameters.get("title", "Draft issue"), "body": parameters.get("body", ""), "publish": False})
     return QuickActionResult(action=action, status="completed", result=result, message="Completed safely without external side effects")

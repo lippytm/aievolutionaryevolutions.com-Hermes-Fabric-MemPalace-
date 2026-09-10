@@ -5,28 +5,11 @@ This repository contains the staged foundation for a cross-platform AI Agent Swa
 ## Current stages
 
 - **Stage 1:** FastAPI foundation, Docker, provider-neutral routing, local/MemPalace memory interface, Quick Action registry, tests, and CI.
-- **Stage 2:** Architect, programming teacher, blockchain teacher, Linux/DevOps, researcher, and release manager agent definitions; swarm planning; audit logging; and safe Quick Action execution.
+- **Stage 2:** Agent definitions, swarm planning, audit logging, and safe Quick Action execution.
+- **Stage 3:** Prompt #11, expanded learning/content/simulation Quick Actions, innovation roadmap, and best-practice guardrails.
 
-Supported provider routing is designed for OpenAI/ChatGPT, Gemini, and Claude. Claude is represented in agent preference policies now; its adapter will be added after its API contract and deployment secret are configured.
+Supported provider routing is designed for OpenAI/ChatGPT, Gemini, and Claude. Claude is included in agent preference policies; its live adapter will be added after its API contract and deployment secret are configured.
 
-## Safety model
+Prompt #11 is available through the prompt registry as the Safe Build-and-Learn Orchestrator. It converts a goal into an explainable staged plan, safe actions, approval-gated actions, tests, and rollback criteria.
 
-Read-only actions can run without approval. External side effects — sending messages, changing GitHub, deploying, financial operations, credentials, blockchain transactions, and destructive actions — require an approval token and an enabled integration. The service never stores provider keys in Git.
-
-## Run locally
-
-```bash
-cp .env.example .env
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .[dev]
-uvicorn app.main:app --reload
-```
-
-With Docker:
-
-```bash
-docker compose up --build
-```
-
-The next stage is to add authenticated Claude routing, verified MemPalace endpoints, Hermes task execution, and real external connectors one at a time.
+External side effects remain disabled by default. The service never stores provider keys in Git.
