@@ -13,8 +13,8 @@ class ActionDefinition:
 
 ACTIONS = {
     "list_memory": ActionDefinition("list_memory", "Recall conversation memory", False, True),
-    "create_lesson": ActionDefinition("create_lesson", "Draft a learning lesson", False, True),
-    "summarize_repository": ActionDefinition("summarize_repository", "Prepare a repository analysis request", False, True),
+    "create_lesson": ActionDefinition("create_lesson", "Create a structured lesson plan", False, True),
+    "summarize_repository": ActionDefinition("summarize_repository", "Prepare a repository analysis plan", False, True),
     "send_email": ActionDefinition("send_email", "Send an email", True),
     "post_slack": ActionDefinition("post_slack", "Post a Slack message", True),
     "run_zapier": ActionDefinition("run_zapier", "Trigger a Zapier automation", True),
@@ -31,7 +31,7 @@ def list_actions() -> list[dict]:
     return [definition.__dict__ for definition in ACTIONS.values()]
 
 
-def execute(action: str, parameters: dict, approval_token: str | None) -> QuickActionResult:
+def execute(action: str, parameters: dict, approval_token: str | None = None) -> QuickActionResult:
     definition = ACTIONS.get(action)
     if not definition:
         return QuickActionResult(action=action, status="unknown", message="Action is not registered")
@@ -41,4 +41,10 @@ def execute(action: str, parameters: dict, approval_token: str | None) -> QuickA
         return QuickActionResult(action=action, status="approval_required", message="Explicit approval is required")
     if not definition.implemented:
         return QuickActionResult(action=action, status="disabled", message="Connector is not implemented yet")
-    return QuickActionResult(action=action, status="completed", result={"parameters": parameters}, message="Completed")
+    if action == "create_lesson":
+        result = {"title": parameters.get("topic", "Untitled lesson"), "objectives": parameters.get("objectives", []), "steps": ["Explain the concept", "Show a worked example", "Give a practice task", "Check understanding"]}
+    elif action == "summarize_repository":
+        result = {"repository": parameters.get("repository"), "requested_checks": ["structure", "dependencies", "tests", "secrets", "deployment", "documentation"]}
+    else:
+        result = {"conversation_id": parameters.get("conversation_id", "default"), "limit": parameters.get("limit", 20)}
+    return QuickActionResult(action=action, status="completed", result=result, message="Completed safely without external side effects")

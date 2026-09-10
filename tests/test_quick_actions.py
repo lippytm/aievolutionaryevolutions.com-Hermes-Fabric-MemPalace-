@@ -8,3 +8,9 @@ def test_external_action_requires_approval():
 
 def test_unknown_action_is_safe():
     assert execute("not-real", {}, None).status == "unknown"
+
+
+def test_lesson_action_returns_structure():
+    result = execute("create_lesson", {"topic": "Python"})
+    assert result.status == "completed"
+    assert result.result["title"] == "Python"

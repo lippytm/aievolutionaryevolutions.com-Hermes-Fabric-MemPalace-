@@ -2,14 +2,12 @@
 
 This repository contains the staged foundation for a cross-platform AI Agent Swarm system serving aievolutionaryevolutions.com.
 
-## Stage 1 included
+## Current stages
 
-- Provider-neutral routing for OpenAI/ChatGPT and Gemini.
-- A memory protocol with a local development store and an optional MemPalace HTTP adapter.
-- A Quick Action registry with explicit approval gates.
-- FastAPI health, routing, memory, and Quick Action endpoints.
-- Docker and Compose configuration with no secrets committed.
-- Automated tests and CI.
+- **Stage 1:** FastAPI foundation, Docker, provider-neutral routing, local/MemPalace memory interface, Quick Action registry, tests, and CI.
+- **Stage 2:** Architect, programming teacher, blockchain teacher, Linux/DevOps, researcher, and release manager agent definitions; swarm planning; audit logging; and safe Quick Action execution.
+
+Supported provider routing is designed for OpenAI/ChatGPT, Gemini, and Claude. Claude is represented in agent preference policies now; its adapter will be added after its API contract and deployment secret are configured.
 
 ## Safety model
 
@@ -31,4 +29,4 @@ With Docker:
 docker compose up --build
 ```
 
-The first milestone is intentionally provider- and platform-neutral. Add real credentials only through deployment secrets, then test one provider at a time before enabling additional agents or Quick Actions.
+The next stage is to add authenticated Claude routing, verified MemPalace endpoints, Hermes task execution, and real external connectors one at a time.
