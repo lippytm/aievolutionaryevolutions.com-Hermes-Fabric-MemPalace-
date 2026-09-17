@@ -22,9 +22,18 @@ npm run sync
 
 Output is written to `out/` and is intentionally ignored by Git.
 
+## Reconcile a provider receipt
+
+After Gemini, Claude, Hostinger, or GitHub returns a completed receipt, verify its bundle ID and every SHA-256 hash:
+
+```bash
+npm run reconcile -- --ledger out/receipt-ledger.json --packet out/gemini/handoff-packet.json --receipt /path/to/receipt.json
+```
+
+A verified receipt remains pending human approval. Verification never publishes, deploys, spends money, or merges code.
+
 ## Operating law
 
 AI proposes → RiskGate evaluates → human owner approves → adapters deliver → recipients acknowledge → QA verifies → MemPalace records → systems improve.
 
 See [SOP.md](SOP.md) before any live transfer.
-
