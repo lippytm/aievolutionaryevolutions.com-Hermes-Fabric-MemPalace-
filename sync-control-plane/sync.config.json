@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1.0",
+  "project_id": "AIEE-MULTI-AI-SYNC",
+  "project_name": "AI Evolutionary Evolutions",
+  "human_owner": "Charles Earl Lipshay",
+  "operating_entity": "Intergalactic Corporate Services LLC",
+  "canonical_domain": "aievolutionaryevolutions.com",
+  "source_directory": "approved-source",
+  "output_directory": "out",
+  "classification": "internal",
+  "live_delivery": false,
+  "destinations": {
+    "github": {
+      "repository": "lippytm/aievolutionaryevolutions.com-Hermes-Fabric-MemPalace-",
+      "role": "canonical_technical_evidence"
+    },
+    "hostinger": {
+      "mode": "ai_website_builder_manual_handoff",
+      "role": "public_website_assembly"
+    },
+    "gemini": {
+      "mode": "manual_or_future_api_adapter",
+      "role": "independent_build_and_review"
+    },
+    "claude": {
+      "mode": "manual_or_future_api_adapter",
+      "role": "independent_build_and_review"
+    }
+  },
+  "required_approval": "Charles Earl Lipshay",
+  "prohibited_patterns": [
+    ".env", "secret", "credential", "password", "private-key", "seed-phrase", "payment-card"
+  ]
+}
