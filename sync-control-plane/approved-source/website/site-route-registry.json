@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "canonical_domain_status": "confirmed_by_owner",
+  "canonical_domain": "aievolutionaryevolutions.com",
+  "embedded_business_pathway": "https://lippytmai.getbizfunds.com",
+  "operating_entity": "Intergalactic Corporate Services LLC",
+  "routes": [
+    {"path":"/","name":"Home","lane":"REAL_BUSINESS","cta":"Start Your First Mission"},
+    {"path":"/start","name":"Start Here","lane":"EDUCATIONAL","cta":"Choose Your Mission"},
+    {"path":"/learn","name":"Learning Worlds","lane":"EDUCATIONAL","cta":"Choose a Learning Path"},
+    {"path":"/build","name":"Build Lab","lane":"EXPERIMENTAL_RND","cta":"Build a Safe Prototype"},
+    {"path":"/ai-big-brains","name":"AI Big Brain Network","lane":"EDUCATIONAL","cta":"Explore the Brain Fleet"},
+    {"path":"/personal-seven","name":"Personal Seven","lane":"BEHIND_THE_SCENES","cta":"Meet the Seven"},
+    {"path":"/creator-universe","name":"Creator Universe","lane":"FICTION_SATIRE","cta":"Enter the Creative Universe"},
+    {"path":"/business-systems","name":"Business Systems","lane":"REAL_BUSINESS","cta":"Build a Business System"},
+    {"path":"/funding-readiness","name":"Funding Readiness","lane":"ADVERTISEMENT_OFFER","cta":"Check Funding Readiness"},
+    {"path":"/transparency","name":"Transparency and Evidence","lane":"REAL_BUSINESS","cta":"View How It Works"},
+    {"path":"/about","name":"Founder, Company and Characters","lane":"BEHIND_THE_SCENES","cta":"Meet the Founder and Characters"}
+  ],
+  "required_global_pages": ["privacy", "terms", "ai-disclosure", "affiliate-disclosure", "accessibility", "support"],
+  "first_publishable_slice": ["/", "/start", "/ai-big-brains", "/funding-readiness", "/transparency"],
+  "live_site_modified": false
+}
