@@ -1,0 +1,21 @@
+{
+  "schema_version": "0.1.0",
+  "bundle_id": "COPY_FROM_HANDOFF",
+  "recipient": {
+    "provider": "gemini-or-claude-or-hostinger-or-github",
+    "model_or_service": "REQUIRED",
+    "version": "IF_AVAILABLE"
+  },
+  "received_file_hashes": [],
+  "status": "acknowledged",
+  "findings": {
+    "verified": [],
+    "conflicts": [],
+    "missing_evidence": [],
+    "risks": [],
+    "proposed_changes": []
+  },
+  "changed_artifacts": [],
+  "estimated_cost": null,
+  "human_approval_required": true
+}
