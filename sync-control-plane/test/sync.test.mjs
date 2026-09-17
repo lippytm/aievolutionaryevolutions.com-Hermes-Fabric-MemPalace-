@@ -25,4 +25,23 @@ for (const destination of Object.keys(config.destinations)) {
 }
 const ledger = JSON.parse(await readFile(path.join(dir, 'out', 'receipt-ledger.json'), 'utf8'));
 if (ledger.destinations.length !== 4 || ledger.status !== 'awaiting_human_approval') throw new Error('Invalid receipt ledger');
+
+const geminiPacketPath = path.join(dir, 'out', 'gemini', 'handoff-packet.json');
+const geminiPacket = JSON.parse(await readFile(geminiPacketPath, 'utf8'));
+const receiptPath = path.join(dir, 'gemini-receipt.json');
+await writeFile(receiptPath, JSON.stringify({
+  schema_version: '0.1.0', bundle_id: geminiPacket.bundle_id,
+  recipient: { provider: 'gemini', model_or_service: 'test', version: 'test' },
+  received_file_hashes: geminiPacket.files.map(({ path, sha256 }) => ({ path, sha256 })),
+  status: 'acknowledged', findings: {}, changed_artifacts: [], estimated_cost: 0,
+  human_approval_required: true
+}));
+const reconcile = spawnSync(process.execPath, [path.resolve('src/reconcile-receipt.mjs'),
+  '--ledger', path.join(dir, 'out', 'receipt-ledger.json'), '--packet', geminiPacketPath, '--receipt', receiptPath
+], { encoding: 'utf8' });
+if (reconcile.status !== 0) throw new Error(reconcile.stderr || reconcile.stdout);
+const reconciled = JSON.parse(await readFile(path.join(dir, 'out', 'receipt-ledger.json'), 'utf8'));
+if (reconciled.destinations.find((item) => item.destination === 'gemini').status !== 'verified_receipt_pending_human_approval') {
+  throw new Error('Receipt reconciliation failed');
+}
 console.log('sync test passed');
