@@ -1,10 +1,11 @@
 {
   "name": "aievolutionaryevolutions-multi-ai-sync",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "sync": "node src/sync.mjs --config sync.config.json",
+    "reconcile": "node src/reconcile-receipt.mjs",
     "test": "node test/sync.test.mjs"
   },
   "engines": {"node": ">=20"}
