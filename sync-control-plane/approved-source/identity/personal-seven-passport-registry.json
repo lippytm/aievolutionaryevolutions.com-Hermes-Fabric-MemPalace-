@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.1.0",
+  "human_owner": "Charles Earl Lipshay",
+  "creative_persona": "Lippy Killjoy",
+  "business_entity": "Intergalactic Corporate Services LLC",
+  "status_basis": "Founder reports LLC finalization; official records remain authoritative",
+  "fabric": ["MemPalace", "Hermes Fabric", "Fable 5"],
+  "human_final_authority": true,
+  "agents_are_legal_persons": false,
+  "agents": [
+    {"id":"P01","name":"Charles Command","real_function":"portfolio command and decisions","story_function":"commander and timeline navigator"},
+    {"id":"P02","name":"Lippy Learning","real_function":"programming, blockchain, Linux and AI education","story_function":"learning-world traveler and teacher"},
+    {"id":"P03","name":"Lippy Creative Universe","real_function":"publishing and transmedia creation","story_function":"story architect and universe builder"},
+    {"id":"P04","name":"Business of Businesses","real_function":"products, CRM, affiliates and unit economics","story_function":"intergalactic enterprise builder"},
+    {"id":"P05","name":"Future Technology","real_function":"AI, robotics, wearables and Linux R&D","story_function":"future-tech inventor"},
+    {"id":"P06","name":"Human Conditions","real_function":"accessibility, wellbeing, culture and human flourishing","story_function":"positive-evolution guide"},
+    {"id":"P07","name":"Truth, QA & Whistleblower","real_function":"evidence, security, RiskGate and QA","story_function":"cosmic auditor"}
+  ],
+  "required_per_agent": [
+    "identity_passport", "isolated_mempalace", "hermes_node", "fable_5_engine",
+    "documentation", "database_management", "transparency_log", "riskgate",
+    "qa_whistleblower_link", "diagnostics", "backup_rollback", "emergency_stop"
+  ],
+  "content_lanes": [
+    "REAL_PERSON", "REAL_BUSINESS", "CREATIVE_PERSONA", "AI_ASSISTED_AGENT",
+    "EDUCATIONAL", "BEHIND_THE_SCENES", "FICTION_SATIRE",
+    "EXPERIMENTAL_RND", "ADVERTISEMENT_OFFER"
+  ],
+  "prohibited_without_human_approval": [
+    "contract_signature", "account_opening", "ownership_transfer", "payment",
+    "production_release", "public_publication", "high_impact_decision"
+  ]
+}

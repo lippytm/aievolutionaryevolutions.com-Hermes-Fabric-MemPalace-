@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aievolutionaryevolutions.com/schemas/handoff-packet-v0.1.json",
+  "title": "Multi-AI Handoff Packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "bundle_id", "created_at", "project", "sender", "destination", "classification", "files", "approval", "receipt_status"],
+  "properties": {
+    "schema_version": {"const": "0.1.0"},
+    "bundle_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "project": {"type": "string", "minLength": 1},
+    "sender": {"type": "string", "minLength": 1},
+    "destination": {"enum": ["github", "hostinger", "gemini", "claude"]},
+    "classification": {"enum": ["public", "internal", "confidential", "restricted"]},
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "bytes": {"type": "integer", "minimum": 0},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["required", "approver", "status"],
+      "properties": {
+        "required": {"const": true},
+        "approver": {"type": "string"},
+        "status": {"enum": ["pending", "approved", "rejected"]}
+      }
+    },
+    "receipt_status": {"enum": ["not_sent", "sent", "acknowledged", "rejected", "failed"]}
+  }
+}
