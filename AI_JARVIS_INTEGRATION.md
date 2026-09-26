@@ -47,3 +47,9 @@ Do not commit API keys, passwords, OAuth tokens, customer data or private busine
 The Unified AI Jarvis review branch now contains a bounded handoff runner, metadata-only MemPalace evidence chain, and a read-only Hostinger website-inventory adapter. The adapter can verify this website's association with the intended Hostinger account after a token is supplied privately and a harmless authenticated request succeeds. No such request has run yet; this file does not connect or alter the live site.
 
 Use the [pilot runbook](https://github.com/lippytm/AI-Jarvis-Assistant-ChatGPT-Gemini-AI-GitHub-Claude-and-all-of-my-Repositories-DOG-Dog-dog-/blob/jarvis/unified-ai-fabric-v0.1/docs/HERMES_MEMPALACE_HOSTINGER.md) before enabling a repository-local workflow. Any AI Website Builder edits, commerce, publication, or deployment require a separately verified integration and owner approval.
+
+## ChatGPT Business and affiliate marketing draft (September 26, 2026)
+
+The [affiliate workflow](docs/CHATGPT_AFFILIATE_WORKFLOW.md) generates a review page and provenance packet from a catalog. There are no approved partner links in the starting catalog. The central AI Jarvis `affiliate_site_review` workflow creates a ChatGPT Business handoff draft and an owner publication gate; it does not post to ChatGPT or Hostinger by itself.
+
+A published Workspace Agent can optionally receive a server-side API trigger after workspace configuration and a scoped token are provisioned. That API does not return agent response text for immediate website rendering. A future on-site tutor would use a separate server-side OpenAI Platform API integration. Both paths require credential and data-boundary review before activation.
