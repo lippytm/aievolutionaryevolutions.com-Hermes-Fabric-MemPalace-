@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "site": "aievolutionaryevolutions.com",
+  "offers": [
+    {"id": "programming-learning", "title": "Programming learning tools", "description": "Review a tool only after its terms, referral URL, claims, and audience fit have been verified.", "category": "programming", "status": "draft", "affiliate_url": null},
+    {"id": "blockchain-learning", "title": "Blockchain learning resources", "description": "Use education-first language and verify any partner offer before linking.", "category": "blockchain", "status": "draft", "affiliate_url": null},
+    {"id": "linux-workstation", "title": "Linux workstation resources", "description": "Check compatibility and partner terms before recommending a product.", "category": "linux", "status": "draft", "affiliate_url": null}
+  ]
+}
