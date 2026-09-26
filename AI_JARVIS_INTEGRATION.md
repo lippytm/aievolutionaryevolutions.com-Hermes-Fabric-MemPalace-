@@ -41,3 +41,9 @@ Do not commit API keys, passwords, OAuth tokens, customer data or private busine
 3. Run one harmless authenticated round trip.
 4. Verify provider identity, bundle ID, timestamp and SHA-256 receipt.
 5. Mark the station connected only after the verification passes.
+
+## Hermes MemPalace pilot (September 26, 2026)
+
+The Unified AI Jarvis review branch now contains a bounded handoff runner, metadata-only MemPalace evidence chain, and a read-only Hostinger website-inventory adapter. The adapter can verify this website's association with the intended Hostinger account after a token is supplied privately and a harmless authenticated request succeeds. No such request has run yet; this file does not connect or alter the live site.
+
+Use the [pilot runbook](https://github.com/lippytm/AI-Jarvis-Assistant-ChatGPT-Gemini-AI-GitHub-Claude-and-all-of-my-Repositories-DOG-Dog-dog-/blob/jarvis/unified-ai-fabric-v0.1/docs/HERMES_MEMPALACE_HOSTINGER.md) before enabling a repository-local workflow. Any AI Website Builder edits, commerce, publication, or deployment require a separately verified integration and owner approval.
