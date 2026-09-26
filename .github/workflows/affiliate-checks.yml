@@ -1,0 +1,17 @@
+name: Affiliate draft checks
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s tests -p 'test_affiliate_workflow.py' -v
+      - run: python -m affiliate.workflow affiliate/catalog.json site
+      - run: git diff --exit-code -- site/affiliate-hub.html site/handoff.json
