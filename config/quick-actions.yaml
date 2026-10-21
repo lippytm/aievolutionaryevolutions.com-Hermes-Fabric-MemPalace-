@@ -1,4 +1,4 @@
-version: 1
+version: 2
 name: ai-platform-quick-actions
 mode: governed
 approval_defaults:
@@ -10,234 +10,29 @@ approval_defaults:
   credential_change: explicit_approval
   public_publish: explicit_approval
 categories:
-  build:
-    - id: build.application
-      outcome: Create an application from an approved specification
-      risk: moderate
-      execution: supervised
-    - id: build.api
-      outcome: Create a versioned API and contract tests
-      risk: moderate
-      execution: supervised
-    - id: build.dashboard
-      outcome: Create a dashboard and navigation structure
-      risk: moderate
-      execution: supervised
-    - id: build.database-schema
-      outcome: Create a reviewed database schema and migration plan
-      risk: high
-      execution: supervised
-    - id: build.workflow
-      outcome: Create a workflow from a natural-language process
-      risk: moderate
-      execution: supervised
-    - id: build.agent
-      outcome: Create a scoped AI assistant
-      risk: moderate
-      execution: supervised
-    - id: build.swarm
-      outcome: Create a coordinated assistant swarm
-      risk: high
-      execution: supervised
-    - id: build.documentation
-      outcome: Generate versioned technical and educational documentation
-      risk: low
-      execution: supervised
-  teach:
-    - id: teach.lesson
-      outcome: Generate a lesson at a selected difficulty
-      risk: low
-      execution: automatic
-    - id: teach.learning-path
-      outcome: Create a personalized learning path
-      risk: low
-      execution: automatic
-    - id: teach.lab
-      outcome: Create a safe practical lab
-      risk: moderate
-      execution: supervised
-    - id: teach.assessment
-      outcome: Generate exercises and assessments
-      risk: low
-      execution: automatic
-    - id: teach.review-solution
-      outcome: Review a learner solution and provide guided feedback
-      risk: low
-      execution: automatic
-    - id: teach.simulation
-      outcome: Create a clearly labeled system or incident simulation
-      risk: moderate
-      execution: supervised
-  connect:
-    - id: connect.ai-provider
-      outcome: Configure an approved AI provider adapter
-      risk: high
-      execution: supervised
-    - id: connect.github
-      outcome: Connect an approved repository with scoped permissions
-      risk: high
-      execution: supervised
-    - id: connect.slack
-      outcome: Configure an approved Slack integration
-      risk: moderate
-      execution: supervised
-    - id: connect.zapier
-      outcome: Configure an approved automation connector
-      risk: moderate
-      execution: supervised
-    - id: connect.database
-      outcome: Configure a database connection with least privilege
-      risk: high
-      execution: supervised
-    - id: connect.webhook
-      outcome: Create and validate a webhook endpoint
-      risk: moderate
-      execution: supervised
-  automate:
-    - id: automate.schedule
-      outcome: Create a scheduled workflow
-      risk: moderate
-      execution: supervised
-    - id: automate.webhook
-      outcome: Create an event-triggered workflow
-      risk: moderate
-      execution: supervised
-    - id: automate.retry
-      outcome: Add bounded retry and backoff behavior
-      risk: low
-      execution: automatic
-    - id: automate.failover
-      outcome: Configure an approved provider failover route
-      risk: high
-      execution: supervised
-    - id: automate.autonomous-run
-      outcome: Run a pre-approved low-risk automation within limits
-      risk: high
-      execution: governed-autonomous
-  improve:
-    - id: improve.code
-      outcome: Propose a reviewed code improvement
-      risk: moderate
-      execution: supervised
-    - id: improve.prompt
-      outcome: Improve a prompt against an evaluation set
-      risk: low
-      execution: supervised
-    - id: improve.workflow
-      outcome: Optimize workflow quality, latency, or cost
-      risk: moderate
-      execution: supervised
-    - id: improve.dependency
-      outcome: Prepare a dependency update with regression checks
-      risk: high
-      execution: supervised
-    - id: improve.documentation
-      outcome: Update documentation from approved changes
-      risk: low
-      execution: automatic
-  assure:
-    - id: assure.unit-tests
-      outcome: Generate and run unit tests
-      risk: low
-      execution: automatic
-    - id: assure.integration-tests
-      outcome: Generate and run integration tests with safe fixtures
-      risk: moderate
-      execution: supervised
-    - id: assure.regression
-      outcome: Compare a candidate against a baseline evaluation
-      risk: low
-      execution: automatic
-    - id: assure.security-review
-      outcome: Run a security and permissions review
-      risk: low
-      execution: automatic
-    - id: assure.release-report
-      outcome: Generate release evidence and known-limitations report
-      risk: low
-      execution: automatic
-  secure:
-    - id: secure.secret-scan
-      outcome: Detect exposed credentials and secrets
-      risk: low
-      execution: automatic
-    - id: secure.dependency-scan
-      outcome: Detect vulnerable dependencies
-      risk: low
-      execution: automatic
-    - id: secure.permission-review
-      outcome: Review tool, API, repository, and data permissions
-      risk: low
-      execution: automatic
-    - id: secure.threat-model
-      outcome: Create a threat model and mitigation plan
-      risk: moderate
-      execution: supervised
-    - id: secure.incident-plan
-      outcome: Create or update an incident response plan
-      risk: moderate
-      execution: supervised
-    - id: secure.backup-verify
-      outcome: Verify backup integrity and recovery readiness
-      risk: moderate
-      execution: supervised
-  operate:
-    - id: operate.health-check
-      outcome: Inspect service, API, database, container, and worker health
-      risk: low
-      execution: automatic
-    - id: operate.logs
-      outcome: Summarize logs and identify actionable patterns
-      risk: low
-      execution: automatic
-    - id: operate.resource-report
-      outcome: Report CPU, memory, storage, network, and queue usage
-      risk: low
-      execution: automatic
-    - id: operate.rollback
-      outcome: Prepare or execute an approved rollback
-      risk: critical
-      execution: explicit-approval
-    - id: operate.pause
-      outcome: Pause a workflow, bot, swarm, or automation
-      risk: high
-      execution: explicit-approval
-  govern:
-    - id: govern.audit-report
-      outcome: Generate an audit and transparency report
-      risk: low
-      execution: automatic
-    - id: govern.objective-map
-      outcome: Map a capability to business and educational objectives
-      risk: low
-      execution: automatic
-    - id: govern.review-action
-      outcome: Review an action's owner, permissions, risk, and rollback plan
-      risk: low
-      execution: automatic
-    - id: govern.retire-capability
-      outcome: Prepare retirement of an obsolete capability
-      risk: high
-      execution: explicit-approval
-  business:
-    - id: business.affiliate-campaign
-      outcome: Draft an affiliate campaign with disclosures
-      risk: moderate
-      execution: supervised
-    - id: business.membership
-      outcome: Create a membership or onboarding flow
-      risk: moderate
-      execution: supervised
-    - id: business.educational-product
-      outcome: Create an educational product plan
-      risk: moderate
-      execution: supervised
-    - id: business.performance-report
-      outcome: Generate a business and referral performance report
-      risk: low
-      execution: automatic
+  build: [application, api, dashboard, database-schema, workflow, agent, swarm, documentation, deployment-package]
+  teach: [lesson, learning-path, lab, assessment, review-solution, simulation, glossary, ebook, audiobook, video-book]
+  connect: [ai-provider, github, slack, zapier, database, webhook, email, storage, exchange-read-only]
+  automate: [schedule, webhook, retry, failover, queue, notification, autonomous-run]
+  improve: [code, prompt, workflow, dependency, documentation, performance, accessibility, cost, reliability]
+  assure: [unit-tests, integration-tests, contract-tests, regression, security-review, accessibility-review, release-report]
+  secure: [secret-scan, dependency-scan, permission-review, threat-model, incident-plan, backup-verify, malware-review, injection-review, data-loss-review]
+  operate: [health-check, logs, resource-report, container-review, service-recovery, rollback, pause, kill-switch, backup, restore-test]
+  govern: [audit-report, transparency-report, objective-map, review-action, consent-review, retention-review, retire-capability]
+  business: [affiliate-campaign, membership, educational-product, onboarding, performance-report, referral-disclosure, partner-review]
+  data: [schema-design, migration-plan, migration-test, data-dictionary, data-quality-check, query-review, access-review, redaction, export, retention-report, reconciliation]
+  finance: [financing-explanation, eligibility-checklist, provider-terms-summary, referral-validation, referral-attribution, payment-flow-design, transaction-reconciliation, payout-report, refund-preparation, unusual-activity-review]
+  crypto: [market-data-import, paper-trading, strategy-backtest, risk-report, trade-plan-draft, wallet-balance-view, address-validation, transaction-reconciliation, trading-pause, emergency-kill-switch]
+  attachments: [attachment-register, metadata-review, accessibility-review, malware-scan, version-review, link-validation, extension-permission-review, revocation-plan]
+  evolution: [failure-analysis, feedback-analysis, capability-discovery, duplicate-detection, conflict-detection, provider-comparison, experiment-branch, baseline-evaluation, improvement-backlog, capability-retirement]
+  swarm: [role-create, role-review, task-route, memory-scope, independent-review, disagreement-resolution, budget-set, stop-condition-set, swarm-pause, swarm-terminate]
+  robotics: [robotics-lesson, simulation-design, sensor-data-review, control-system-review, safety-check, humanoid-project-plan, wearable-project-plan]
+  linux: [distribution-guide, shell-lesson, hardening-review, container-review, network-review, package-review, recovery-guide]
+  blockchain: [smart-contract-review, testnet-plan, wallet-safety-lesson, transaction-review, protocol-risk-report]
 execution_contract:
   required: [validation, permissions, audit, verification]
   state_changing: [preview, approval, rollback_or_recovery]
   autonomous: [budget, timeout, rate_limit, stop_condition, escalation]
+  financial_and_crypto: [risk_limits, disclosure, consent, reconciliation, human_approval]
+  attachments: [owner, source, version, accessibility, security_scan, retention]
   output: [status, summary, affected_resources, evidence, warnings, verification, recovery]
