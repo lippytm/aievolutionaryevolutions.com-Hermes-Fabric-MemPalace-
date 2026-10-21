@@ -1,0 +1,94 @@
+version: 1
+name: ai-provider-registry
+routing:
+  strategy: evidence_quality_cost_latency_safety
+  default_mode: compare_then_select
+  production_mode: approval_gated
+  failover: explicit_provider_policy
+  logging: provider_metadata_without_prompt_secrets
+providers:
+  openai:
+    role: api-provider
+    adapter: openai-compatible-api
+    capabilities: [text, vision, tools, structured-output, embeddings]
+    auth: secure_api_credential
+    notes: Use the approved OpenAI developer API contract. Do not assume a ChatGPT subscription is an API credential.
+  chatgpt-business:
+    role: workspace-connector
+    adapter: approved_workspace_connector_or_api
+    capabilities: [workspace-context, approved_tasks, review]
+    auth: workspace_authorization
+    notes: Enable only capabilities exposed by the authorized workspace integration. Keep workspace data and API-provider data separated.
+  gemini:
+    role: api-provider
+    adapter: gemini-api
+    capabilities: [text, multimodal, tools, structured-output, embeddings, live-interaction]
+    auth: secure_api_credential
+    notes: Use the current official Gemini API contract and apply provider-specific safety and retention settings.
+  claude:
+    role: api-provider
+    adapter: anthropic-api
+    capabilities: [text, vision, tools, long-context]
+    auth: secure_api_credential
+    notes: Use the current official Anthropic API contract and provider-specific controls.
+  claude-cowork:
+    role: workspace-agent-connector
+    adapter: approved-claude-workspace-connector
+    capabilities: [multi-step-tasks, files, connectors, scheduled-work]
+    auth: workspace_authorization
+    notes: Treat Cowork as an account/workspace agent connector. Do not represent it as a generic API endpoint unless an approved API path exists.
+  perplexity:
+    role: api-provider
+    adapter: perplexity-api
+    capabilities: [research, retrieval, citations, structured-output]
+    auth: secure_api_credential
+    notes: Use Perplexity for research and retrieval workflows with source and freshness metadata.
+input_contract:
+  required:
+    - request_id
+    - project_id
+    - user_intent
+    - normalized_messages
+    - task_class
+    - requested_output
+    - permission_context
+  optional:
+    - files
+    - approved_memory
+    - tools
+    - provider_preferences
+    - evaluation_set
+    - budget_limit
+    - time_limit
+  controls:
+    - classify_data_before_routing
+    - remove_unnecessary_sensitive_data
+    - validate_files_and_attachments
+    - enforce_provider_permissions
+    - preserve_attribution_and_sources
+output_contract:
+  required:
+    - request_id
+    - provider
+    - model_or_connector
+    - response
+    - structured_status
+    - usage_metadata
+    - safety_metadata
+    - verification_status
+  optional:
+    - citations
+    - tool_results
+    - files_created
+    - suggested_follow_up_actions
+    - alternative_provider_results
+merge_contract:
+  sequence: [normalize, classify, authorize, route, execute, verify, compare, synthesize, audit]
+  merge_rules:
+    - preserve_provider_provenance
+    - do_not_merge_conflicting_facts_without_labeling_conflict
+    - prefer_verified_evidence
+    - separate_facts_assumptions_and_recommendations
+    - require_review_for_high_impact_outputs
+    - never_merge_secrets_into_prompts_or_outputs
+  review_modes: [single_provider, parallel_compare, independent_review, swarm_consensus]
