@@ -13,18 +13,19 @@
 - Automation and governed-autonomy framework
 - Database, cybersecurity, financial, crypto, and payment governance
 - AI assistant and swarm scaling framework
+- Multi-provider AI input, routing, and merge contracts
 - Implementation roadmap and acceptance checklist
-- Quick-action and release preflight scripts
+- Quick-action, provider, and release preflight scripts
 
 ## In implementation
 
 - Registry loader and runtime action contracts
+- Provider adapter runtime and connector authorization
 - Identity, workspace, project, and permission services
 - Secure secret storage integration
 - Action preview, approval, execution, verification, and audit services
 - Dashboard action discovery and execution views
 - AI suggestion ranking and explanation service
-- Provider and integration adapters
 - Assistant and swarm orchestration services
 
 ## Not yet enabled
@@ -38,4 +39,4 @@
 
 ## Definition of done
 
-The platform is ready for a production release only when the acceptance checklist passes, the preflight checks pass, security and integration reviews are complete, staging validation succeeds, recovery is tested, and production approval is recorded.
+The platform is ready for a production release only when the acceptance checklist passes, the platform preflight passes, security and integration reviews are complete, staging validation succeeds, recovery is tested, and production approval is recorded.
