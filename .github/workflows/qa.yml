@@ -1,0 +1,43 @@
+name: QA Gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality and QA checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate shell scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts_found=0
+          while IFS= read -r -d '' file; do
+            scripts_found=1
+            bash -n "$file"
+          done < <(find . -type f -name '*.sh' -not -path './.git/*' -print0)
+          if [ "$scripts_found" -eq 0 ]; then
+            echo "No shell scripts found; documentation-only validation passed."
+          fi
+
+      - name: Check for obvious credential files
+        shell: bash
+        run: |
+          set -euo pipefail
+          if find . -path './.git' -prune -o -type f \( -name '.env' -o -name '*.pem' -o -name '*.key' \) -print | grep -q .; then
+            echo 'Potential credential file detected. Remove it and use secret storage.'
+            exit 1
+          fi
+
+      - name: Confirm release gate exists
+        shell: bash
+        run: test -s docs/quality/RELEASE-GATE.md
