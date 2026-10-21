@@ -1,0 +1,70 @@
+version: 1
+name: multi-provider-workflow-communications
+providers: [chatgpt, chatgpt-business, claude, claude-cowork, gemini, perplexity]
+workflow_stages:
+  - receive
+  - identify
+  - normalize
+  - classify
+  - authorize
+  - route
+  - execute
+  - compare
+  - synthesize
+  - verify
+  - communicate
+  - audit
+actions:
+  - id: communication.receive
+    outcome: Accept an authorized provider message, response, file, or tool result
+    risk: moderate
+    approval: authorization-required
+  - id: communication.normalize
+    outcome: Convert provider-specific content into the common message contract
+    risk: low
+    approval: automatic
+  - id: communication.classify
+    outcome: Classify facts, assumptions, actions, conflicts, and uncertainty
+    risk: low
+    approval: automatic
+  - id: communication.route
+    outcome: Select a provider, provider group, or Jarvis review swarm
+    risk: moderate
+    approval: policy-controlled
+  - id: communication.parallel-compare
+    outcome: Request independent provider outputs for comparison
+    risk: moderate
+    approval: policy-controlled
+  - id: communication.merge
+    outcome: Merge compatible outputs while preserving provenance and disagreement
+    risk: moderate
+    approval: policy-controlled
+  - id: communication.verify
+    outcome: Verify a merged result against acceptance criteria and evidence
+    risk: low
+    approval: automatic
+  - id: communication.clarify
+    outcome: Request missing context or resolve a provider conflict
+    risk: low
+    approval: automatic
+  - id: communication.taskify
+    outcome: Convert a verified result into implementation tasks and quick actions
+    risk: moderate
+    approval: supervised
+  - id: communication.educate
+    outcome: Convert the result into a lesson, lab, or training explanation
+    risk: low
+    approval: supervised
+  - id: communication.report
+    outcome: Generate a technical, QA, security, decision, or transparency report
+    risk: low
+    approval: supervised
+  - id: communication.external-send
+    outcome: Send an approved message to an external provider or recipient
+    risk: high
+    approval: explicit
+contracts:
+  normalized_input: [request_id, provider, project_id, message_type, content, permissions, data_classification]
+  normalized_output: [request_id, provider, response, provenance, citations, uncertainty, usage_metadata, verification_status]
+  merge_requirements: [preserve_provenance, label_conflicts, separate_facts_and_assumptions, verify_high_impact_outputs]
+  audit_requirements: [input_source, routing_decision, providers_used, files_shared, approvals, result, follow_up]
