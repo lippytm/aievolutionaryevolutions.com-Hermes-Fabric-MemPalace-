@@ -1,43 +1,18 @@
-name: Jarvis Auto-Deploy to Hostinger VPS
-# Copy this file to .github/workflows/deploy.yml in your repo
-# AI Jarvis Assistants Swarms Systems
+name: Disabled Legacy Jarvis Deployment Template
 
+# Kept outside .github/workflows/ intentionally. This repository has no Node app
+# at its root. Do not activate this stub as a deployment pipeline.
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
-jobs:
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      - run: npm ci
-      - run: npm test
-        continue-on-error: true
+permissions:
+  contents: read
 
-  deploy:
-    name: Deploy to Hostinger VPS
-    needs: test
+jobs:
+  explain:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v4
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            cd ~/jarvis/mempalace
-            git fetch origin main && git reset --hard origin/main
-            npm ci --production --silent
-            pm2 restart jarvis --update-env
-            pm2 save
-            echo "Deployed at $(date)"
+      - name: Refuse deployment from a documentation-only checkout
+        run: |
+          echo "::error::No deployable root Node application exists here. Read docs/EXISTING_CONNECTION_RECOVERY.md and identify the existing authoritative runtime."
+          exit 1
