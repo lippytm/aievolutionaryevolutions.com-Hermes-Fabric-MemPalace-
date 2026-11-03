@@ -4,7 +4,7 @@ A private, local API key manager connected to the existing Hermes/Fabric/MemPala
 
 ## Open
 
-On Windows, double-click **Start Jarvis.cmd**. It starts a hidden local server and opens an authorized browser window. To reopen, double-click it again. The service listens only on `127.0.0.1` at an automatically chosen port. A restart generates a new browser access token.
+On Windows, double-click **Start Jarvis.cmd**. It starts a hidden local server and opens an authorized browser window. To reopen, double-click it again. The service listens only on `127.0.0.1` at an automatically chosen port. A restart generates a new browser access token. Concurrent starts are serialized, and the vault permits only one writer process. Relative path overrides are resolved before the server starts.
 
 The approved `OPENAI_API_KEY` is read from `../../.env.local` when present, or from the exact file specified by `JARVIS_ENV_FILE`. Its value is never sent to the browser or copied into the vault. It is transmitted only to `https://api.openai.com/v1/models` when you press **Check connection**. This checks authenticated read access, not paid generation, model availability for a particular task, billing, or quota.
 
@@ -17,6 +17,8 @@ The approved `OPENAI_API_KEY` is read from `../../.env.local` when present, or f
 5. **Replace key** stores an updated credential locally. **Disable locally** blocks this manager's use of that entry. Neither action revokes a key at its provider. Revoke old keys in the provider dashboard.
 
 Additional keys use AES-256-GCM encryption with a random 96-bit nonce, authenticated context and a passphrase-derived 256-bit key (scrypt N=32768, r=8, p=1, random 256-bit salt). The passphrase is never persisted. The derived key stays in the server process only while unlocked; it is cleared on lock and after 15 idle minutes. JavaScript memory cannot guarantee forensic erasure of every transient string. Connection names, fingerprints, scopes and local audit metadata are not encrypted. The approved external env-file key remains governed by that file's protections and is not covered by the vault lock.
+
+An interrupted or forcibly killed process can leave a lock file. The app fails closed instead of stealing it; verify that its recorded process has exited before manually removing a stale `vault.writer.lock` or `launcher.startup.lock`. Normal shutdown releases these locks.
 
 The vault and local session file are in `../../work/jarvis-private/`, unless `JARVIS_DATA_DIR` specifies another directory. Keep this runtime folder outside the source repository and exclude it from every Git commit and deployment archive. Keep this directory private; possession of `session.json` permits local manager access. Back up `vault.json` securely along with your separately stored passphrase; a vault backup does not include the approved env-file key. Do not upload `.private/` or `.env.local` to Hostinger or GitHub.
 

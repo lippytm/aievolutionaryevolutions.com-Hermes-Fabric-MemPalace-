@@ -29,6 +29,7 @@ export async function createManager({directory=path.resolve(ROOT,'../../work/jar
       const data=await body(req);let result;
       if(url.pathname==='/api/unlock'){unlockAttempts=unlockAttempts.filter(t=>Date.now()-t<60000);guard(unlockAttempts.length<5,'Wait one minute before another unlock attempt');unlockAttempts.push(Date.now());result=await vault.unlock(data.passphrase);}
       else if(url.pathname==='/api/lock')result=await vault.lock();
+      else if(url.pathname==='/api/shutdown'){result={stopping:true};setImmediate(()=>server.close());}
       else if(url.pathname==='/api/keys')result=await vault.add(data);
       else if(url.pathname==='/api/rotate')result=await vault.rotate(data.id,data);
       else if(url.pathname==='/api/status')result=await vault.status(data.id,data.status,data.version);
@@ -50,7 +51,7 @@ export async function createManager({directory=path.resolve(ROOT,'../../work/jar
   });
   server.requestTimeout=15000;server.headersTimeout=10000;
   const timer=setInterval(()=>{if(vault.key&&Date.now()-lastTouch>15*60000)vault.lock().catch(()=>{});},30000);timer.unref();
-  server.on('close',()=>{clearInterval(timer);vault.key?.fill(0);vault.key=null;});
+  server.on('close',()=>{clearInterval(timer);vault.close().catch(()=>{});});
   await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
   origin='http://127.0.0.1:'+server.address().port;
   return {server,vault,origin,token,url:origin+'/#access='+token};
