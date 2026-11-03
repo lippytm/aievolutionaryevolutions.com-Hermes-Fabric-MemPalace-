@@ -22,6 +22,14 @@
       "mode": "manual_or_future_api_adapter",
       "role": "independent_build_and_review"
     },
+    "chatgpt_business": {
+      "mode": "reviewed_manual_handoff",
+      "role": "owner_workspace_context_and_review"
+    },
+    "codex": {
+      "mode": "reviewed_manual_handoff",
+      "role": "repository_implementation_and_validation"
+    },
     "claude": {
       "mode": "manual_or_future_api_adapter",
       "role": "independent_build_and_review"
@@ -32,3 +40,4 @@
     ".env", "secret", "credential", "password", "private-key", "seed-phrase", "payment-card"
   ]
 }
+

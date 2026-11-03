@@ -52,7 +52,9 @@ const destinationInstructions = {
   github: 'Review on a branch. Require tests and human approval before merge. GitHub is the canonical technical evidence record.',
   hostinger: 'Use manual mode on a duplicated Hostinger AI Builder site. Add one page or section at a time. Review mobile layout and disclosures before publishing.',
   gemini: 'Import this packet as independent context. Preserve project IDs, cite source paths, record disagreements, and return an acknowledgement plus proposed changes.',
-  claude: 'Import this packet as independent context. Audit clarity, risks, contradictions, and implementation choices. Return an acknowledgement plus evidence-linked recommendations.'
+  claude: 'Import this packet as independent context. Audit clarity, risks, contradictions, and implementation choices. Return an acknowledgement plus evidence-linked recommendations.',
+  chatgpt_business: 'Import only into the intended ChatGPT Business workspace/project. Preserve bundle IDs and file hashes. Return an acknowledgement; do not claim automatic chat history access or background synchronization.',
+  codex: 'Open the intended repository and branch. Preserve bundle IDs and file hashes, inspect repository instructions, run applicable checks, and return evidence with an acknowledgement. Never include credentials.'
 };
 
 for (const destination of Object.keys(config.destinations)) {
@@ -89,3 +91,4 @@ const receiptLedger = {
 };
 await writeFile(path.join(outputRoot, 'receipt-ledger.json'), JSON.stringify(receiptLedger, null, 2) + '\n');
 console.log(JSON.stringify({ ok: true, bundle_id: bundleId, files: files.length, destinations: Object.keys(config.destinations) }));
+
