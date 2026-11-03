@@ -11,7 +11,7 @@ const config = {
   human_owner: 'Charles Earl Lipshay', operating_entity: 'Intergalactic Corporate Services LLC',
   canonical_domain: 'aievolutionaryevolutions.com', source_directory: 'approved-source', output_directory: 'out',
   classification: 'internal', live_delivery: false,
-  destinations: { github: {}, hostinger: {}, gemini: {}, claude: {} },
+  destinations: { github: {}, hostinger: {}, gemini: {}, claude: {}, chatgpt_business: {}, codex: {} },
   required_approval: 'Charles Earl Lipshay',
   prohibited_patterns: ['.env', 'secret', 'credential', 'password', 'private-key', 'seed-phrase', 'payment-card']
 };
@@ -24,7 +24,11 @@ for (const destination of Object.keys(config.destinations)) {
   if (packet.destination !== destination || packet.files.length !== 1 || packet.approval.status !== 'pending') throw new Error(`Invalid ${destination} packet`);
 }
 const ledger = JSON.parse(await readFile(path.join(dir, 'out', 'receipt-ledger.json'), 'utf8'));
-if (ledger.destinations.length !== 4 || ledger.status !== 'awaiting_human_approval') throw new Error('Invalid receipt ledger');
+if (ledger.destinations.length !== 6 || ledger.status !== 'awaiting_human_approval') throw new Error('Invalid receipt ledger');
+for (const destination of ['chatgpt_business', 'codex']) {
+  const handoff = await readFile(path.join(dir, 'out', destination, 'HANDOFF.md'), 'utf8');
+  if (handoff.includes('undefined') || !handoff.includes('Preserve bundle IDs')) throw new Error(`Missing ${destination} instructions`);
+}
 
 const geminiPacketPath = path.join(dir, 'out', 'gemini', 'handoff-packet.json');
 const geminiPacket = JSON.parse(await readFile(geminiPacketPath, 'utf8'));
@@ -45,3 +49,4 @@ if (reconciled.destinations.find((item) => item.destination === 'gemini').status
   throw new Error('Receipt reconciliation failed');
 }
 console.log('sync test passed');
+

@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.2.0",
+  "program": "Business of Businesses / Systems of Systems / The Encyclopedia of Everything Applied",
+  "council": {
+    "platform_brain_count": 22,
+    "personal_brain_count": 7,
+    "total_brain_count": 29
+  },
+  "infrastructure": ["Brain Gateway", "MemPalace", "Hermes Fabric", "Fable 5", "RiskGate", "QA"],
+  "fleet_model": {
+    "fleet_per_brain": true,
+    "total_fleets": 29,
+    "platform_fleets": 22,
+    "personal_vault_fleets": 7,
+    "profile": "AI MemPalace Hermes Fabric Fable 5 Fleet",
+    "required_subsystems": [
+      "brain_passport",
+      "mempalace_memory_stack",
+      "hermes_fabric_communications",
+      "fable_5_variation_engine",
+      "documentation_engine",
+      "database_management_plane",
+      "transparency_console",
+      "riskgate_permissions",
+      "qa_whistleblower_node",
+      "observability_diagnostics",
+      "recovery_evolution"
+    ],
+    "isolation": {
+      "unique_namespace_per_fleet": true,
+      "unique_identity_per_fleet": true,
+      "separate_policy_and_budget": true,
+      "matching_signed_handoff_receipts": true,
+      "personal_vault_cross_scope_default": "deny"
+    }
+  },
+  "provider_classes": ["openai", "anthropic", "google", "linux_hosted_open_model", "deterministic_tool"],
+  "brains": [
+    {"id":"B01","scope":"platform","name":"Lippy Command / Mission","capabilities":["mission_planning","scope_control"],"release_authority":false},
+    {"id":"B02","scope":"platform","name":"Systems Architecture","capabilities":["architecture","interfaces","scaling"],"release_authority":false},
+    {"id":"B03","scope":"platform","name":"Learning Science & Curriculum","capabilities":["curriculum","assessment","adaptation"],"release_authority":false},
+    {"id":"B04","scope":"platform","name":"Game World Design","capabilities":["game_design","quests","playtesting"],"release_authority":false},
+    {"id":"B05","scope":"platform","name":"Programming Tutor","capabilities":["programming_instruction","code_examples"],"release_authority":false},
+    {"id":"B06","scope":"platform","name":"Blockchain Tutor","capabilities":["blockchain_instruction","testnets","smart_contracts"],"release_authority":false},
+    {"id":"B07","scope":"platform","name":"Linux & Omarchy","capabilities":["linux","omarchy","workstation_labs"],"release_authority":false},
+    {"id":"B08","scope":"platform","name":"Bedrock VM Research","capabilities":["bedrock_linux","vm_research","isolation"],"release_authority":false},
+    {"id":"B09","scope":"platform","name":"Trading Simulation","capabilities":["backtesting","market_simulation","risk_education"],"release_authority":false},
+    {"id":"B10","scope":"platform","name":"Data & Evidence","capabilities":["provenance","retrieval","data_quality"],"release_authority":false},
+    {"id":"B11","scope":"platform","name":"Code Builder","capabilities":["implementation","testing"],"release_authority":false},
+    {"id":"B12","scope":"platform","name":"Code Review & Debugging","capabilities":["code_review","debugging","reproduction"],"release_authority":false},
+    {"id":"B13","scope":"platform","name":"DevOps & GitHub","capabilities":["git","ci_cd","releases"],"release_authority":false},
+    {"id":"B14","scope":"platform","name":"Cybersecurity & Privacy","capabilities":["threat_modeling","privacy","tenant_isolation"],"release_authority":false},
+    {"id":"B15","scope":"platform","name":"QA & Whistleblower","capabilities":["qa","challenge","veto_recommendation"],"release_authority":false},
+    {"id":"B16","scope":"platform","name":"Accessibility & Inclusion","capabilities":["accessibility","inclusive_learning"],"release_authority":false},
+    {"id":"B17","scope":"platform","name":"Publishing & Transmedia","capabilities":["ebooks","audiobooks","videobooks","nft_book_assets"],"release_authority":false},
+    {"id":"B18","scope":"platform","name":"Creator Marketplace","capabilities":["marketplace","licensing","payout_design"],"release_authority":false},
+    {"id":"B19","scope":"platform","name":"Affiliate Integrity","capabilities":["attribution","commission_ledger","fraud_controls"],"release_authority":false},
+    {"id":"B20","scope":"platform","name":"Customer Support & CRM","capabilities":["support","feedback","escalation"],"release_authority":false},
+    {"id":"B21","scope":"platform","name":"Revenue & Unit Economics","capabilities":["pricing","unit_economics","experiments"],"release_authority":false},
+    {"id":"B22","scope":"platform","name":"Synthesis & Release","capabilities":["synthesis","evidence_packets","release_recommendation"],"release_authority":false},
+    {"id":"P01","scope":"personal_vault","name":"Personal Chief of Staff","capabilities":["priorities","private_missions","decision_packets"],"release_authority":false},
+    {"id":"P02","scope":"personal_vault","name":"Personal Programming Tutor","capabilities":["adaptive_programming_instruction"],"release_authority":false},
+    {"id":"P03","scope":"personal_vault","name":"Personal Blockchain & Simulation Lab","capabilities":["contracts","testnets","economic_simulation"],"release_authority":false},
+    {"id":"P04","scope":"personal_vault","name":"Personal Linux & AI Workstation","capabilities":["omarchy","linux","local_model_research"],"release_authority":false},
+    {"id":"P05","scope":"personal_vault","name":"Personal Creative Universe & Fable 5","capabilities":["books","worldbuilding","media_variants"],"release_authority":false},
+    {"id":"P06","scope":"personal_vault","name":"Personal Business & Revenue R&D","capabilities":["offers","pricing","product_experiments"],"release_authority":false},
+    {"id":"P07","scope":"personal_vault","name":"Personal Evidence, QA & Whistleblower","capabilities":["contradiction_checks","risk_register","audit"],"release_authority":false}
+  ],
+  "policy": {
+    "human_release_approval_required": true,
+    "majority_vote_determines_truth": false,
+    "preserve_dissent": true,
+    "private_chain_of_thought_collection": false,
+    "personal_platform_data_separation": true,
+    "live_trading_default": false,
+    "real_asset_blockchain_default": false,
+    "production_tool_access_default": false
+  }
+}

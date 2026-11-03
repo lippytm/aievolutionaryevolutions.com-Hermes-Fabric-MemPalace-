@@ -11,7 +11,7 @@
     "created_at": {"type": "string", "format": "date-time"},
     "project": {"type": "string", "minLength": 1},
     "sender": {"type": "string", "minLength": 1},
-    "destination": {"enum": ["github", "hostinger", "gemini", "claude"]},
+    "destination": {"enum": ["github", "hostinger", "gemini", "claude", "chatgpt_business", "codex"]},
     "classification": {"enum": ["public", "internal", "confidential", "restricted"]},
     "files": {
       "type": "array",
@@ -37,3 +37,4 @@
     "receipt_status": {"enum": ["not_sent", "sent", "acknowledged", "rejected", "failed"]}
   }
 }
+
