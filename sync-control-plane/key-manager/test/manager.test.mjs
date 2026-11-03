@@ -9,6 +9,13 @@ import {Vault} from '../core.mjs';
 import {createManager} from '../server.mjs';
 const pass='synthetic-long-passphrase';
 const synthetic='synthetic-api-key-value-123456';
+test('failed unlock persistence clears the live key and cannot create orphan ciphertext',async()=>{
+ const v=await make();const save=v.save.bind(v);v.save=async()=>{throw new Error('synthetic disk write failure');};
+ await assert.rejects(v.unlock(pass),/disk write failure/);assert.equal(v.key,null);assert.equal(v.state.verifier,null);
+ v.save=save;await assert.rejects(v.add({provider:'openai',label:'Must stay locked',scope:'platform',secret:synthetic}),/Unlock/);assert.equal(v.state.entries.length,0);
+ await v.unlock(pass);await v.add({provider:'openai',label:'Recoverable',scope:'platform',secret:synthetic});await v.close();
+ const reopened=await new Vault(v.directory).init();await reopened.unlock(pass);assert.equal(reopened.secure('unprotect',reopened.state.entries[0].ciphertext),synthetic);await reopened.close();
+});
 async function make(options={}){return new Vault(await mkdtemp(path.join(tmpdir(),'jarvis-vault-')),options).init();}
 test('ciphertext survives restart, requires passphrase, and detects tampering',async()=>{const v=await make();await assert.rejects(v.add({provider:'openai',label:'Key',scope:'platform',secret:synthetic}),/Unlock/);await v.unlock(pass);const e=await v.add({provider:'openai',label:'Key',scope:'platform',secret:synthetic});const disk=await readFile(v.file,'utf8');assert(!disk.includes(synthetic));assert(!disk.includes(pass));await v.close();const v2=await new Vault(v.directory).init();await assert.rejects(v2.unlock('incorrect-long-passphrase'),/Incorrect/);await v2.unlock(pass);assert.equal(v2.secure('unprotect',v2.state.entries[0].ciphertext),synthetic);const packed=JSON.parse(v2.state.entries[0].ciphertext);packed.data=Buffer.from('tampered').toString('base64');assert.throws(()=>v2.secure('unprotect',JSON.stringify(packed)));await v2.lock();assert.throws(()=>v2.secure('unprotect',v.state.entries[0].ciphertext),/Unlock/);assert.equal(e.version,1);});
 test('concurrent replacements reject stale revision and never expose secrets',async()=>{const v=await make();await v.unlock(pass);const e=await v.add({provider:'github',label:'Repository read',scope:'platform',secret:synthetic});const results=await Promise.allSettled([v.rotate(e.id,{version:1,secret:synthetic+'a'}),v.rotate(e.id,{version:1,secret:synthetic+'b'})]);assert.equal(results.filter(r=>r.status==='fulfilled').length,1);assert.equal((await v.list())[0].version,2);assert(!JSON.stringify(await v.list()).includes('ciphertext'));assert(!JSON.stringify(v.state.audit).includes(synthetic));});
